@@ -1,0 +1,39 @@
+input {
+    display: block;
+    color: white;
+}
+
+label {
+    color: white;
+}
+
+.deslect {
+    padding-bottom: 30px;
+}
+
+.btn-new-party {
+    width: 250px;
+    height: 150px;
+    display: block;
+    font-size: 20px;
+}
+
+.card
+{
+    height: 700px;
+    overflow-y: hidden;
+    background-color: rgba(41, 41, 47, 0.9);
+    [class~=party]
+    {
+        &, label, input
+        {
+            color: #fff;
+        }
+    }
+}
+
+.header-text {
+    font-size: 20px;
+    text-decoration: underline;
+    color: white;
+}

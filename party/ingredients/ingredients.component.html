@@ -1,0 +1,56 @@
+<button class="btn btn-md btn-elegant"
+        (click)="addToggle()"
+        id="notFound"
+        style="margin-top: 50px; margin-bottom: 10px;">
+    New Ingredient
+</button>
+
+<label for="notFound"
+       *ngIf="!add">
+    <p>Click "New Ingredient" to add an ingredient to the dropdown</p>
+</label>
+
+<form #ingredientForm="ngForm"
+      *ngIf="add">
+    <div class="row">
+        <div class="col col-12 form-group"
+             style="margin: 10px;">
+            <label for="ingredientName">New Ingredient Name</label>
+            <input id="ingredientName"
+                   ngModel
+                   type="text"
+                   class="form-control"
+                   placeholder="enter new ingredient..."
+                   name="ingredientName"
+                   #ingredientName="ngModel"
+                   required
+                   minlength="3"
+                   pattern="^([A-Za-z]|\s)*$" />
+        </div>
+
+        <div *ngIf="ingredientName.errors">
+            <div class="alert alert-danger"
+                 *ngIf="ingredientName.touched && ingredientName.errors.pattern">An ingredient name can only contain letters.</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-12">
+            <button class="btn btn-md second-color"
+                    (click)="addIngredient(ingredientName.value)"
+                    [disabled]="ingredientForm.invalid">
+                Add to Ingredients
+            </button>
+        </div>
+
+        <div class="alert alert-danger"
+             *ngIf="duplicateIngredient">
+            {{ duplicateIngredient }} is already an ingredient. Select it from the dropdown above.
+        </div>
+        
+        <div class="alert alert-warning"
+             *ngIf="newIngredient">
+            {{ newIngredient }} has been added!
+        </div>
+    </div>
+</form>

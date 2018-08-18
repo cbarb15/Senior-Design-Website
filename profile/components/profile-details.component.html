@@ -1,0 +1,82 @@
+<div class="card z-depth-5">
+    <div class="card-header third-color text-center">
+        <h3 class="white-text">
+            <i class="fa fa-address-card"></i> Profile
+        </h3>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="avatar text-center">
+                    <img [src]="imgSrc"
+                         class="img-fluid rounded-circle z-depth-1">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 mt-2">
+                <file-upload baseDir="images/profile"
+                             (uploadDone)="imageUploadDone($event)">
+                </file-upload>
+            </div>
+        </div>
+
+        <hr>
+
+        <form [formGroup]="form">
+            <div class="md-form">
+                <input type="text"
+                       id="displayNameInput"
+                       class="form-control"
+                       formControlName="displayName">
+                <label for="displayNameInput"
+                       class="active">Display Name
+                </label>
+            </div>
+
+            <div class="md-form">
+                <input type="text"
+                       id="firstNameInput"
+                       class="form-control"
+                       formControlName="firstName">
+                <label for="firstNameInput"
+                       class="active">First Name
+                </label>
+            </div>
+
+            <div class="md-form">
+                <input type="text"
+                       id="lastNameInput"
+                       class="form-control"
+                       formControlName="lastName">
+                <label for="lastNameInput"
+                       class="active">Last Name
+                </label>
+            </div>
+
+            <div class="md-form">
+                <input type="text"
+                       id="phoneNumberInput"
+                       class="form-control"
+                       formControlName="phoneNumber">
+                <label for="phoneNumberInput"
+                       class="active">Phone Number
+                </label>
+            </div>
+            
+            <div class="md-form">
+                <input type="text"
+                       id="emailInput"
+                       class="form-control"
+                       formControlName="email"
+                       readonly>
+                <label for="emailInput"
+                       class="active">Email
+                </label>
+            </div>
+        </form>
+    </div>
+</div>

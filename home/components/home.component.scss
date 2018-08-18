@@ -1,0 +1,44 @@
+.card
+{
+    background-color: rgba(41, 41, 47, 0.95);
+    [class~=party]
+    {
+        &, label, input
+        {
+            color: #fff;
+            opacity: 1;
+        }
+    }
+}
+
+.list-group-item {
+    cursor: pointer;
+    color: white;
+    text-align: center;
+    text-transform: capitalize;
+    border-radius: 10px;
+    width: 200px;
+    border: none;
+    margin: 12px;
+}
+
+.column-border {
+    border-right: 1px solid white;
+}
+
+.header {
+    font-size: 20px;
+    text-decoration: underline;
+}
+
+::placeholder {
+    color: white;
+}
+
+.row {
+    align-content: center;
+}
+
+.header-row {
+    margin-bottom: 20px;
+}

@@ -1,0 +1,121 @@
+<br/>
+<div class="row">
+    <div class="col col-1"></div>
+    <div class="col col-5">
+        <div class="card z-depth-5">
+            <div class="card-header third-color text-center">
+                <h3 class="white-text">
+                    <i class="fa fa-glass"></i> Party List
+                </h3>
+            </div>
+
+            <div class="card-body" style="overflow-y: hidden;">
+                <div class="row">
+                    <div class="col">
+                        <div class="dselect">
+                            <label class="header-text">Selected Party</label>
+                            <mdb-select class="form-control" [options]="partyOptions" placeholder="Select party..." class="colorful-select dropdown-secondary"
+                                (click)="getParty()" [(ngModel)]="selectedOption" id="partyOptionId">
+                            </mdb-select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="partyForm">
+                    <div class="col col-5" style="padding-left: 40px;">
+                        <form action="" [formGroup]="partyForm">
+                            <label for="nameId" class="header-text" style="margin-top: 40px;">Party Name</label>
+                            <input type="text" class="form-control" formControlName="name" id="nameId" />
+
+                            <label for="passCodeId" class="header-text">Party Passcode</label>
+                            <input type="text" class="form-control" formControlName="passCode" id="passCodeId" />
+
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row" style="position:absolute; bottom: 40px;">
+                    <div class="col col-6">
+                        <div class="row">
+                            <div class="col">
+                                <button class="btn btn-lg btn-warning" (click)="updateParty()" mdbRippleRadius *ngIf="partyForm" [disabled]="partyForm.pristine || partyForm.invalid">
+                                    Update Party
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <button class="btn btn-lg btn-danger" (click)="turnOnParty()" mdbRippleRadius *ngIf="partyForm && bottlesVerified && !partyOn">
+                                    Turn Party On
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <button class="btn btn-lg btn-danger" (click)="turnOffParty()" mdbRippleRadius *ngIf="partyOn">
+                                    Turn Current Party Off
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col col-6">
+                        <button class="btn btn-unique btn-new-party" (click)="basicModal.show()" mdbRippleRadius>
+                            Create New Party
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col col-5">
+        <app-bottles *ngIf="pid" [pid$]="pid$" [currentPid$]="currentPid$"></app-bottles>
+    </div>
+</div>
+
+<div mdbModal #basicModal="mdb-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+    aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100" id="myModalLabel">Party Details</h4>
+            </div>
+
+            <div class="modal-body">
+                <form [formGroup]="partyEntryForm" (ngSubmit)="createParty()">
+                    <div class="md-form">
+                        <div class="row">
+                            <div class="col">
+                                <input type="text" class="form-control" formControlName="name" id="nameInput" placeholder="Party name (only letters and numbers)"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <input type="text" class="form-control" formControlName="passCode" id="passCodeInput" placeholder="passcode (at least 6 characters)"
+                                /> </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <button type="button" class="btn btn-md btn-warning waves-light" aria-label="Close" (click)="basicModal.hide()" mdbRippleRadius>Cancel</button>
+                                <button type="button" [disabled]="partyEntryForm.invalid" class="btn btn-lg second-color relative waves-light" mdbRippleRadius
+                                    (click)="basicModal.hide()" (click)="createParty()">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer"> </div>
+        </div>
+    </div>
+</div>
+<br/>

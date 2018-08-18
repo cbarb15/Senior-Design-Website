@@ -1,0 +1,32 @@
+.card
+{
+    height: 700px;
+    overflow-y: scroll;
+    background-color: rgba(41, 41, 47, 0.9);
+    [class~=bottles]
+    {
+        &, label, input
+        {
+            color: white;
+        }
+    }
+}
+
+.header-text {
+    font-size: 18px;
+    text-decoration: underline;
+    color: white;
+}
+
+.modal-content {
+    background-color: rgba(41, 41, 47, 0.9);
+        &, label, input
+        {
+            color: #fff;
+        }
+}
+
+.modal-row {
+    margin-bottom: 10px;
+    align-items: center;
+}

@@ -1,0 +1,20 @@
+<div class="card z-depth-5">
+
+    <div class="card-header third-color text-center">
+        <h3 class="white-text">
+            <i class="fa fa-glass"></i> Previously Ordered Drinks
+        </h3>
+    </div>
+    
+    <div class="card-body">
+        <div class="col-12 d-flex flex-wrap"
+             id="historyDiv">
+    
+            <app-drink *ngFor="let hist of history; index as index"
+                       [drink]="hist.drink"
+                       [dateOrdered]="hist.date">
+            </app-drink>
+    
+        </div>
+    </div>
+</div>

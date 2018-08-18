@@ -1,0 +1,76 @@
+<div class="row" *ngIf="isCurrentPartyMember && !showOtherParties">
+    <div class="col col-12">
+        <button class="list-group-item btn-unique" (click)="showOtherPartiesToJoin()">Show Other Parties</button>
+        <app-menu></app-menu>
+    </div>
+</div>
+
+<div *ngIf="!isCurrentPartyMember || showOtherParties">
+    <br/>
+    <div class="row">
+        <div class="col col-2"></div>
+        <div class="col col-6">
+            <div class="card z-depth-5" style="min-height: 400px;">
+                <div class="card-header third-color text-center">
+                    <h3 class="white-text">
+                        <i class="fa fa-glass"></i> Join Party
+                    </h3>
+                </div>
+                <div class="card-body party">
+                    <div *ngIf="!currentParty">
+                        <h4>No parties are currently being hosted</h4>
+                    </div>
+                    <div class="row header-row" *ngIf="currentParty">
+                        <div class="col col-4 column-border">
+                            <label class="header" for="name">Current Party Name</label>
+                            <input type="text" id="name" [value]="currentParty.name" disabled/>
+                        </div>
+                        <div class="col col-4">
+                            <div>
+                                <label class="header" for="passcodeId">Passcode</label>
+                                <input type="text" id="passcodeId" [placeholder]="currentPartyPlaceholder" [disabled]="isMemberOf(currentParty)" #currentPasscode/>
+                            </div>
+                        </div>
+                        <div class="col col-4">
+                            <button class="btn btn-lg btn-success" *ngIf="!isMemberOf(currentParty)" mdbRippleRadius (click)="joinCurrentParty(currentPasscode)">Join Current Party</button>
+                            <button class="btn btn-lg btn-success" *ngIf="isMemberOf(currentParty)" mdbRippleRadius (click)="leaveCurrentParty()">Leave Current Party</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-4 column-border">
+                            <span class="header">Saved Parties</span>
+                        </div>
+                        <div class="col col-4">
+                            <span class="header">Passcode</span>
+                        </div>
+                        <div class="col col-4"></div>
+                    </div>
+                    <div *ngFor="let party of allParties; index as index">
+                        <div class="row" *ngIf="(party && !currentParty) || (currentParty && party.pid !== currentParty.pid)">
+                            <div class="col col-4 column-border">
+                                <label for="name"></label>
+                                <input type="text" id="name" [value]="party.name" disabled/>
+                            </div>
+                            <div class="col col-4">
+                                <div>
+                                    <label for="passcodeId"></label>
+                                    <input type="text" id="passcodeId" [placeholder]="partyMember[index]" [disabled]="isMemberOf(party)" #passcode/>
+                                </div>
+                            </div>
+                            <div class="col col-4">
+                                <button class="btn btn-lg btn-unique" *ngIf="!isMemberOf(party)" mdbRippleRadius (click)="joinParty(index, passcode)">Join Party</button>
+                                <button class="btn btn-lg btn-unique" *ngIf="isMemberOf(party)" mdbRippleRadius (click)="leaveParty(index)">Leave Party</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-2"></div>
+        <div class="col col-2">
+            <button *ngIf="isCurrentPartyMember" class="btn btn-elegant otherParties" (click)="showOtherPartiesToJoin()">
+                Back to Current party
+            </button>
+        </div>
+    </div>
+</div>

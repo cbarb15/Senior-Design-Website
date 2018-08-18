@@ -1,0 +1,24 @@
+.active
+{
+    background-color: #4E9B00;
+    filter: brightness(120%);
+    border: none;
+}
+
+.list-group-item {
+    cursor: pointer;
+    color: white;
+    text-align: center;
+    float: right;
+    border-radius: 10px;
+    width: 200px;
+    border: none;
+    margin: 10px;
+}
+.list-group-item:hover {
+    filter: brightness(120%);
+}
+
+.card {
+    height: 800px;
+}

@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-2">
+        <ul class="list-group">
+            <div *ngFor="let keyword of keywords; index as index">
+                <li class="list-group-item warning-color-dark"
+                    [id]="keyword"
+                    (click)="onKeywordClicked(index)"
+                    [class.active]="index === selected">
+                    {{ keyword }}
+                </li>
+            </div>
+        </ul>
+    </div>
+    
+    <div class="col-10"
+        style="overflow-y: hidden; padding: 10px;">
+        <div class="d-flex flex-wrap">
+            <app-drink *ngFor="let drink of drinks; index as index"
+                       [drink]="drink">
+            </app-drink>
+        </div>
+    </div>
+</div>

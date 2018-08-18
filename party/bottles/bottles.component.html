@@ -1,0 +1,112 @@
+<div class="card z-depth-5">
+  <div class="card-header third-color text-center">
+    <h3 class="white-text">
+      <i class="fa fa-glass"></i> Edit Bottle Contents
+    </h3>
+  </div>
+
+  <div class="card-body">
+    <form [formGroup]="bottlesForm" novalidate (ngSubmit)="updateBottles()">
+      <div formArrayName="bottles">
+        <div class="row">
+          <div class="col-2">
+            <span class="header-text">Bottle #</span>
+          </div>
+
+          <div class="col-4">
+            <span class="header-text">Name</span>
+          </div>
+          
+          <div class="col-4">
+            <span class="header-text">Amount (oz)</span>
+          </div>
+        </div>
+
+        <div class="bottles" *ngFor="let bottle of bottles.controls; let i=index">
+          <div [formGroupName]="i" class="row">
+            <div class="col-2">
+              <input type="text" id="bottleNumber" class="form-control" [value]=i+1 disabled style="text-align: center;">
+            </div>
+
+            <div class="col-4">
+              <div class="md-form">
+                <input type="text" id="bottleName" class="form-control" name="name-{{i}}" formControlName="name" disabled #name>
+              </div>
+            </div>
+
+            <div class="col-2">
+              <div class="md-form">
+                <input type="number" id="bottleAmountLeft" class="form-control" [value]="bottle.value.amount_left" name="amountleft-{{i}}"
+                  formControlName="amount_left" #amount_left>
+              </div>
+
+            </div>
+            <div class="col col-3">
+              <button type="button" class="btn btn-md btn-unique" (click)="basicModal.show()" (click)="setIndex(i)" mdbRippleRadius>Change Ingredient</button>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col col-2"></div>
+            <div class="col col-10">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col col-2"></div>
+        <div class="col col-5">
+          <div *ngIf="duplicate" class="alert alert-danger">Cannot submit form with duplicate bottles!</div>
+        </div>
+
+        <div class="col col-5">
+          <button class="btn btn-lg btn-warning" type="submit" [disabled]="!formReady">
+            Submit Changes
+          </button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
+
+<div mdbModal #basicModal="mdb-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+  aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #880e4f;">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">Edit Ingredient of Bottle {{ index + 1 }}</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="row modal-row">
+          <div class="col col-12">
+            <label for="ingredient"></label>
+            <mdb-select [options]="ingredients" class="colorful-select dropdown-secondary" placeholder="Select Ingredient..." id="ingredient"
+              #optionSelected>
+            </mdb-select>
+          </div>
+        </div>
+
+        <div class="row modal-row">
+          <div class="col col-12">
+            <button type="button" class="btn btn-lg btn-warning waves-light" aria-label="Close" (click)="basicModal.hide()" mdbRippleRadius>Cancel</button>
+            <button type="button" class="btn btn-lg btn-unique relative waves-light" mdbRippleRadius (click)="basicModal.hide()" (click)="updateBottle(optionSelected, index)">Save changes</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col col-12">
+            <app-ingredients (ingredientEmitter)="updateBottleFromChild($event)" (ingredientEmitter)="basicModal.hide()"></app-ingredients>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer"> </div>
+
+    </div>
+  </div>
+</div>

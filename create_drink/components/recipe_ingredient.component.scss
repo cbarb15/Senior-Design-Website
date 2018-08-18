@@ -1,0 +1,45 @@
+.container {
+    display: flex;
+    align-items: center;
+}
+.input-alternate{
+    width: 250px;
+    text-align: center;
+    vertical-align: middle;
+    pointer-events: none;
+    padding: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+.dselect{
+    width: 100%;
+}
+.ounce{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.fa-plus-square-o{
+    color: #397009;
+    margin-right: 10px;
+}
+.fa-plus-square-o:hover{
+    cursor: pointer;
+}
+.fa-minus-square-o{
+    color: #a00202;
+    margin-right: 10px;
+}
+.fa-minus-square-o:hover{
+    cursor: pointer;
+}
+.btn-sm{
+    width: 75px;
+    pointer-events: none; 
+    margin-left: 2px;
+}
+.btn-md{
+    height: 50px;
+}
+.btn-md:hover{
+    cursor: pointer;
+}
