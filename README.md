@@ -1,3 +1,5 @@
 # This was a website that I helped develop with a team for our senior project
 
-sdfsd
+Here are some snapshots of the different parts of the website
+
+
